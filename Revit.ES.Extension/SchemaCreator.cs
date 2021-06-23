@@ -1,5 +1,5 @@
 /* 
- * Copyright 2012 © Victor Chekalin
+ * Copyright 2012 � Victor Chekalin
  * 
  * THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY 
  * KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
@@ -93,7 +93,11 @@ namespace Revit.ES.Extension
                 if (!string.IsNullOrEmpty(fieldAttribute.Documentation))
                     fieldBuilder.SetDocumentation(fieldAttribute.Documentation);
                 if (fieldBuilder.NeedsUnits())
+#if FORGETYPEID
+                    fieldBuilder.SetSpec(new Autodesk.Revit.DB.ForgeTypeId(fieldAttribute.SpecTypeId));
+#else
                     fieldBuilder.SetUnitType(fieldAttribute.UnitType);
+#endif
 
                 
             }
